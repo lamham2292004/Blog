@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /blog
+
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3306/blog"
+    username: root
+    password: abc123-
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
