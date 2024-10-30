@@ -8,6 +8,7 @@ public enum ErrorCode {
     LASTNAME_INVALID(1004,"Tên phải đủ 3 ký tự"),
     EMAIL_NOT_EXITED(1005,"Email không tồn tại"),
     ADDRESS_INVALID(1006,"Địa chỉ phải có ít nhất 2 ký tự"),
+    UNAUTHENTICATED(1007,"unthenticasted"),
     ;
 
     ErrorCode(int code, String message) {

@@ -24,7 +24,7 @@ public class UserService {
 
     UserMapper userMapper;
 //CREATE
-    public User createUser(UserCreationRequest request) {
+    public UserResponse createUser(UserCreationRequest request) {
 
         //ko cho trùng email
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -34,11 +34,12 @@ public class UserService {
         //mã hóa pass
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        return userRepository.save(user);
+        return userMapper.toUserResponse(userRepository.save(user));
     }
 //READ
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserResponse> getUsers() {
+        return userRepository.findAll().stream()
+                .map(userMapper::toUserResponse).toList();
     }
 
     public UserResponse getUser(String id) {
