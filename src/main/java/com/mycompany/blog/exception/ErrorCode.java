@@ -9,6 +9,7 @@ public enum ErrorCode {
     EMAIL_NOT_EXITED(1005,"Email không tồn tại"),
     ADDRESS_INVALID(1006,"Địa chỉ phải có ít nhất 2 ký tự"),
     UNAUTHENTICATED(1007,"unthenticasted"),
+    USER_EXISTS(1008,"user đã tồn tại"),
     ;
 
     ErrorCode(int code, String message) {

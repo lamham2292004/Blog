@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
+    String username;
     String password;
     String firstName;
     String lastName;

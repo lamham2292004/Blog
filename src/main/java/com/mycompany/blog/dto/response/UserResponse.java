@@ -7,6 +7,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,9 +19,9 @@ public class UserResponse {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
     String email;
-    String password;
     String firstName;
     String lastName;
     LocalDate dob;
     String address;
+    Set<String> roles;
 }
