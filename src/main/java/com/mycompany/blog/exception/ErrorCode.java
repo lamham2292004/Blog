@@ -14,9 +14,9 @@ public enum ErrorCode {
     LASTNAME_INVALID(1005,"Tên phải đủ 3 ký tự",HttpStatus.BAD_REQUEST),
     EMAIL_NOT_EXITED(1006,"Email không tồn tại",HttpStatus.NOT_FOUND),
     ADDRESS_INVALID(1007,"Địa chỉ phải có ít nhất 2 ký tự",HttpStatus.BAD_REQUEST),
-    UNAUTHENTICATED(1008,"unthenticasted",HttpStatus.UNAUTHORIZED),
+    UNAUTHENTICATED(1008,"chưa được xác thực",HttpStatus.UNAUTHORIZED),
     USER_EXISTS(1009,"user đã tồn tại",HttpStatus.BAD_REQUEST),
-    UNAUTHORIZED(1010, "you do not have permisstion",HttpStatus.FORBIDDEN),
+    UNAUTHORIZED(1010, "Bạn không có quyền",HttpStatus.FORBIDDEN),
     ;
 
     ErrorCode(int code, String message,HttpStatusCode statusCode) {
