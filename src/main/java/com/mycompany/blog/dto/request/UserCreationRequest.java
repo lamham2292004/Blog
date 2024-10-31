@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserCreationRequest {
-    @Size(min = 3, message = "USER_EXISTS")
+    @Size(min = 0, message = "USER_EXISTS")
     String username;
     @Email (message = "EMAIL_EXITED")
     String email;

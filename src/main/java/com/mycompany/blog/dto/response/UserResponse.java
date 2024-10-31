@@ -18,6 +18,7 @@ public class UserResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
+    String username;
     String email;
     String firstName;
     String lastName;
