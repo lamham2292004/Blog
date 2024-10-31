@@ -12,6 +12,9 @@ import com.mycompany.blog.exception.ErrorCode;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Service
+@Slf4j
 public class UserService {
     UserRepository userRepository;
     UserMapper userMapper;
@@ -47,21 +51,28 @@ public class UserService {
         return userMapper.toUserResponse(userRepository.save(user));
     }
 //READ
-    public List<UserResponse> getUsers() {
-        return userRepository.findAll().stream()
-                .map(userMapper::toUserResponse).toList();
-    }
+@PreAuthorize("hasRole('ADMIN')")
+public List<UserResponse> getUsers(){
+    log.info("In method get Users");
+    return userRepository.findAll().stream()
+            .map(userMapper::toUserResponse).toList();
+}
 
-    public UserResponse getUser(String id) {
+    @PostAuthorize("returnObject.username == authentication.name")
+    public UserResponse getUser(String id){
+        log.info("In method get user by Id");
         return userMapper.toUserResponse(userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User Not Found")));
+                .orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXITED)));
     }
 //UPDATE
     public UserResponse updateUser(String userId ,UserUpdateRequest request) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User Not Found"));
+                .orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXITED));
+
         userMapper.updateUser(user,request);
+
         return userMapper.toUserResponse(userRepository.save(user));
+
     }//DELETE
     public void deleteUser(String userId) {
         userRepository.deleteById(userId);
