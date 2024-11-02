@@ -60,9 +60,9 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(()->new  AppException(ErrorCode.EMAIL_NOT_EXITED));
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 
         boolean authenticated = passwordEncoder.matches(request.getPassword(),
                 user.getPassword());
@@ -105,8 +105,8 @@ public class AuthenticationService {
 
     private String buildScope(User user){
         StringJoiner stringJoiner = new StringJoiner(" ");
-        if (!CollectionUtils.isEmpty(user.getRoles()))
-            user.getRoles().forEach(stringJoiner::add);
+//        if (!CollectionUtils.isEmpty(user.getRoles()))
+//            user.getRoles().forEach(stringJoiner::add);
 
         return stringJoiner.toString();
     }

@@ -12,7 +12,9 @@ import org.mapstruct.MappingTarget;
 public interface UserMapper {
      User toUser(UserCreationRequest request);
 
-//     @Mapping(source = "firstName", target = "lastName") ( code này có nghĩa là gán first = last / vd : first = lam thì last đang là mai anh cũng sẽ thành lam )
+     @Mapping(target = "roles", ignore = true)
+
      UserResponse toUserResponse(User user);
+
      void updateUser(@MappingTarget User user, UserUpdateRequest request);
 }
